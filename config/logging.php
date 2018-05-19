@@ -36,20 +36,20 @@ return [
         ],
 
         'single' => [
-            'driver' => 'single',
+            'driver' => 'errorlog',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
-            'driver' => 'daily',
+            'driver' => 'errorlog',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 7,
         ],
 
         'slack' => [
-            'driver' => 'slack',
+            'driver' => 'errorlog',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
@@ -57,11 +57,16 @@ return [
         ],
 
         'syslog' => [
-            'driver' => 'syslog',
+            'driver' => 'errorlog',
             'level' => 'debug',
         ],
 
         'errorlog' => [
+            'driver' => 'errorlog',
+            'level' => 'debug',
+        ],
+
+        'info' => [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
