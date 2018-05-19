@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Coupon;
+use App\Sell;
 use Fahim\PaypalIPN\PaypalIPNListener;
 
 class SellsController extends Controller
@@ -45,6 +46,8 @@ class SellsController extends Controller
         if ($verified) {
             if ($_POST['address_status'] == 'confirmed') {
                 // Check outh POST variable and insert your logic here
+                // Sell $s = new Sell();
+
                 Log::info("payment verified and inserted to db");
             }
         } else {
