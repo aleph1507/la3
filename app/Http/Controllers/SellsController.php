@@ -46,7 +46,7 @@ class SellsController extends Controller
         if ($verified) {
             if ($_POST['address_status'] == 'confirmed') {
                 // Check outh POST variable and insert your logic here
-                Sell s = new Sell();
+                $s = new Sell();
                 $s->textReport = $report;
                 $s->save();
                 Log::info("payment verified and inserted to db");
