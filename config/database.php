@@ -1,10 +1,10 @@
 <?php
 
-// $DATABASE_URL = parse_url(getenv("DATABASE_URL"));
-// $host = $url["host"];
-// $username = $url["user"];
-// $password = $url["pass"];
-// $database = substr($url["path"], 1);
+$DATABASE_URL = parse_url(getenv("DATABASE_URL"));
+$host = $url["host"]??null;
+$username = $url["user"]??null;
+$password = $url["pass"]??null;
+$database = substr($url["path"], 1)??null;
 
 return [
 
@@ -19,8 +19,8 @@ return [
     |
     */
 
-    // 'default' => env('DB_CONNECTION', 'pgsql_heroku'),
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql_heroku'),
+    // 'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,18 +41,18 @@ return [
 
     'connections' => [
 
-        // 'pgsql_heroku' => [
-        //     'driver' => 'pgsql',
-        //     'host' => $DATABASE_URL["host"],
-        //     'port' => $DATABASE_URL["port"],
-        //     'database' => ltrim($DATABASE_URL["path"], "/"),
-        //     'username' => $DATABASE_URL["user"],
-        //     'password' => $DATABASE_URL["pass"],
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'schema' => 'public',
-        //     'sslmode' => 'require',
-        // ],
+        'pgsql_heroku' => [
+            'driver' => 'pgsql',
+            'host' => $DATABASE_URL["host"],
+            'port' => $DATABASE_URL["port"],
+            'database' => ltrim($DATABASE_URL["path"], "/"),
+            'username' => $DATABASE_URL["user"],
+            'password' => $DATABASE_URL["pass"],
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'require',
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
