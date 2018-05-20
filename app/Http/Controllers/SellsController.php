@@ -57,12 +57,21 @@ class SellsController extends Controller
       $s3->textReport = "posle post = request->all()";
       $s3->save();
 
-      $s = new Sell();
-      $s->textReport = "post : " . $post;
-      $s->save();
+      $post_dump = var_dump($post);
+      $s4 = new Sell();
+      $s4->textReport = "post_dump : $post_dump";
+      $s4->save();
 
       $response = (string) $provider->verifyIPN($post);
 
+      $s5 = new Sell();
+      $s5->textReport = "posle response = provider->verifyIPN(post)";
+      $s5->save();
+
+      $response_dump = var_dump($response);
+      $s6 = new Sell();
+      $s6->textReport = "response_dump: $response_dump";
+      $s6->save();
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
