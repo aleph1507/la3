@@ -119,14 +119,18 @@ class SellsController extends Controller
           // Your code goes here ...
 
           $s = new Sell();
+          $s->textReport = "vo VERIFIED";
+          $s->save();          
+
+          $s = new Sell();
           $s->coupon = $post['coupon'];
           $request_string = (string)$request;
           $s->textReport = "request_string: " . $request_string;
           $s->save();
 
-          // $s = new Sell();
-          // $s->textReport = "vo VERIFIED";
-          // $s->save();
+          $s = new Sell();
+          $s->textReport = "vo VERIFIED";
+          $s->save();
           //
           // $s = new Sell();
           // $s->textReport = $report;
