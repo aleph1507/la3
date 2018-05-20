@@ -74,8 +74,9 @@ class SellsController extends Controller
       } else {
         // $post_dump = var_dump($post);
         // $post_type = gettype($post);
-        $post_string = implode(' ,  ', $post);
-        $sPost->textReport = "post_string: $post_string";
+        // $post_string = implode(' ,  ', $post);
+        // $sPost->textReport = "post_string: $post_string";
+        $sPost->textReport = "post[custom] : $post['custom']";
       }
       $sPost->save();
 
