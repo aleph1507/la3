@@ -76,7 +76,7 @@ class SellsController extends Controller
         // $post_type = gettype($post);
         // $post_string = implode(' ,  ', $post);
         // $sPost->textReport = "post_string: $post_string";
-        $sPost->textReport = "post[custom] : $post['custom']";
+        $sPost->textReport = "post[custom] : " . $post['custom'];
       }
       $sPost->save();
 
