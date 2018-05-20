@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Coupon;
 use App\Sell;
-use Fahim\PaypalIPN\PaypalIPNListener;
+// use Fahim\PaypalIPN\PaypalIPNListener;
+use Srmklive\PayPal\Services\ExpressCheckout;
+use Srmklive\PayPal\Services\AdaptivePayments;
 
 class SellsController extends Controller
 {
@@ -30,30 +32,51 @@ class SellsController extends Controller
       return $codes;
     }
 
+    public function paypalIpn(Request $request)
+    {
+      // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
+      $provider = new ExpressCheckout;
+
+      $request->merge(['cmd' => '_notify-validate']);
+      $post = $request->all();
+
+      $response = (string) $provider->verifyIPN($post);
+
+      if ($response === 'VERIFIED') {
+          // Your code goes here ...
+      }
+    }
+
     public function paypalIpn()
     {
-        $ipn = new PaypalIPNListener();
-        $ipn->use_sandbox = true;
 
-        $verified = $ipn->processIpn();
+      // $provider = new ExpressCheckout;      // To use express checkout.
 
-        $report = $ipn->getTextReport();
 
-        Log::info("-----new payment-----");
+      // $provider = new AdaptivePayments;
 
-        Log::info($report);
-
-        if ($verified) {
-            if ($_POST['address_status'] == 'confirmed') {
-                // Check outh POST variable and insert your logic here
-                $s = new Sell();
-                $s->textReport = $report;
-                $s->save();
-                Log::info("payment verified and inserted to db");
-            }
-        } else {
-            Log::info("Some thing went wrong in the payment !");
-        }
+        // $ipn = new PaypalIPNListener();
+        // $ipn->use_sandbox = true;
+        //
+        // $verified = $ipn->processIpn();
+        //
+        // $report = $ipn->getTextReport();
+        //
+        // Log::info("-----new payment-----");
+        //
+        // Log::info($report);
+        //
+        // if ($verified) {
+        //     if ($_POST['address_status'] == 'confirmed') {
+        //         // Check outh POST variable and insert your logic here
+        //         $s = new Sell();
+        //         $s->textReport = $report;
+        //         $s->save();
+        //         Log::info("payment verified and inserted to db");
+        //     }
+        // } else {
+        //     Log::info("Some thing went wrong in the payment !");
+        // }
     }
 
     /**
