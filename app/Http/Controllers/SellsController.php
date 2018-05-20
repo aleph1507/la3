@@ -96,21 +96,21 @@ class SellsController extends Controller
       }
       $sRes->save();
 
-      $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
-      curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-      curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
-
-      if ( !($res = curl_exec($ch)) ) {
-        // error_log("Got " . curl_error($ch) . " when processing IPN data");
-        curl_close($ch);
-        exit;
-      }
+      // $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
+      // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      // curl_setopt($ch, CURLOPT_POST, 1);
+      // curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+      // curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
+      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+      // curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+      // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
+      //
+      // if ( !($res = curl_exec($ch)) ) {
+      //   // error_log("Got " . curl_error($ch) . " when processing IPN data");
+      //   curl_close($ch);
+      //   exit;
+      // }
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
