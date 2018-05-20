@@ -57,8 +57,9 @@ class SellsController extends Controller
       if(empty($request)){
         $sReq->textReport = "request is empty";
       } else {
-        $request_dump = var_dump($request);
-        $sReq->textReport = "request_dump: $request_dump";
+        // $request_dump = var_dump($request);
+        $req_type = gettype($request);
+        $sReq->textReport = "request_type: $req_type";
       }
       $sReq->save();
 
@@ -70,8 +71,9 @@ class SellsController extends Controller
       if(empty($post)){
         $sPost->textReport = "post is empty";
       } else {
-        $post_dump = var_dump($post);
-        $sPost->textReport = "post_dump: $post_dump";
+        // $post_dump = var_dump($post);
+        $post_type = gettype($post);
+        $sPost->textReport = "gettype(post): $post_type";
       }
       $sPost->save();
 
@@ -85,8 +87,9 @@ class SellsController extends Controller
       if(empty($response)){
         $sRes->textReport = "response is empty";
       } else {
-        $response_dump = var_dump($response);
-        $sRes->textReport = "response_dump: $response_dump";
+        // $response_dump = var_dump($response);
+        $res_type = gettype($response);
+        $sRes->textReport = "response_type: $res_type";
       }
       $sRes->save();
 
