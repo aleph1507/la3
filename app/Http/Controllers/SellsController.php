@@ -23,6 +23,8 @@ class SellsController extends Controller
 
     public function getCC() {
       // $this->paypalIpn();
+
+      Log::info("in getCC");
       $coupons = Coupon::all();
       $codes = [];
       $index = 0;
@@ -34,6 +36,8 @@ class SellsController extends Controller
 
     public function paypalIpn(Request $request)
     {
+
+      Log::info("in paypalIpn");
       // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
       $provider = new ExpressCheckout;
 
@@ -42,7 +46,10 @@ class SellsController extends Controller
 
       $response = (string) $provider->verifyIPN($post);
 
-      if ($response === 'VERIFIED') {
+
+      Log::info("payment before verified and inserted to db");
+
+      if ($response == 'VERIFIED') {
           // Your code goes here ...
           $s = new Sell();
           $s->textReport = $report;
