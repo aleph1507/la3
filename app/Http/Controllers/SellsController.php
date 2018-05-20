@@ -53,14 +53,27 @@ class SellsController extends Controller
       $s2->textReport = "posle request->merge(['cmd' => '_notify-validate'])";
       $s2->save();
       $post = $request->all();
+      $sReq = new Sell();
+      if(empty($request)){
+        $sReq->textReport = "request is empty";
+      } else {
+        $request_dump = var_dump($request);
+        $sReq->textReport = "request_dump: $request_dump";
+      }
+      $sReq->save();
+
       $s3 = new Sell();
       $s3->textReport = "posle post = request->all()";
       $s3->save();
 
-      $post_dump = var_dump($post);
-      $s4 = new Sell();
-      $s4->textReport = "post_dump : $post_dump";
-      $s4->save();
+      $sPost = new Sell();
+      if(empty($post)){
+        $sPost->textReport = "post is empty";
+      } else {
+        $post_dump = var_dump($post);
+        $sPost->textReport = "post_dump: $post_dump";
+      }
+      $sPost->save();
 
       $response = (string) $provider->verifyIPN($post);
 
@@ -68,10 +81,14 @@ class SellsController extends Controller
       $s5->textReport = "posle response = provider->verifyIPN(post)";
       $s5->save();
 
-      $response_dump = var_dump($response);
-      $s6 = new Sell();
-      $s6->textReport = "response_dump: $response_dump";
-      $s6->save();
+      $sRes = new Sell();
+      if(empty($response)){
+        $sRes->textReport = "response is empty";
+      } else {
+        $response_dump = var_dump($response);
+        $sRes->textReport = "response_dump: $response_dump";
+      }
+      $sRes->save();
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
