@@ -37,64 +37,64 @@ class SellsController extends Controller
     public function paypalIpn(Request $request)
     {
 
-      $s0 = new Sell();
-      $s0->textReport = "vo paypalIPN()";
-      $s0->save();
+      // $s0 = new Sell();
+      // $s0->textReport = "vo paypalIPN()";
+      // $s0->save();
       // error_log("in paypalIpn()");
       // Log::info("in paypalIpn");
       // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
       $provider = new ExpressCheckout;
 
-      $s1 = new Sell();
-      $s1->textReport = "posle provider = new ExpressCheckout";
-      $s1->save();
+      // $s1 = new Sell();
+      // $s1->textReport = "posle provider = new ExpressCheckout";
+      // $s1->save();
       $request->merge(['cmd' => '_notify-validate']);
-      $s2 = new Sell();
-      $s2->textReport = "posle request->merge(['cmd' => '_notify-validate'])";
-      $s2->save();
+      // $s2 = new Sell();
+      // $s2->textReport = "posle request->merge(['cmd' => '_notify-validate'])";
+      // $s2->save();
       $post = $request->all();
-      $sReq = new Sell();
-      if(empty($request)){
-        $sReq->textReport = "request is empty";
-      } else {
-        // $request_dump = var_dump($request);
-        $request_string = (string)$request;
-        // $req_type = gettype($request);
-        $sReq->textReport = "request_string: $request_string";
-      }
-      $sReq->save();
+      // $sReq = new Sell();
+      // if(empty($request)){
+      //   $sReq->textReport = "request is empty";
+      // } else {
+      //   // $request_dump = var_dump($request);
+      //   $request_string = (string)$request;
+      //   // $req_type = gettype($request);
+      //   $sReq->textReport = "request_string: $request_string";
+      // }
+      // $sReq->save();
+      //
+      // $s3 = new Sell();
+      // $s3->textReport = "posle post = request->all()";
+      // $s3->save();
 
-      $s3 = new Sell();
-      $s3->textReport = "posle post = request->all()";
-      $s3->save();
-
-      $sPost = new Sell();
-      if(empty($post)){
-        $sPost->textReport = "post is empty";
-      } else {
-        // $post_dump = var_dump($post);
-        // $post_type = gettype($post);
-        // $post_string = implode(' ,  ', $post);
-        // $sPost->textReport = "post_string: $post_string";
-        $sPost->textReport = "post[custom] : " . $post['custom'];
-      }
-      $sPost->save();
+      // $sPost = new Sell();
+      // if(empty($post)){
+      //   $sPost->textReport = "post is empty";
+      // } else {
+      //   // $post_dump = var_dump($post);
+      //   // $post_type = gettype($post);
+      //   // $post_string = implode(' ,  ', $post);
+      //   // $sPost->textReport = "post_string: $post_string";
+      //   $sPost->textReport = "post[custom] : " . $post['custom'];
+      // }
+      // $sPost->save();
 
       $response = (string) $provider->verifyIPN($post);
 
-      $s5 = new Sell();
-      $s5->textReport = "posle response = provider->verifyIPN(post)";
-      $s5->save();
-
-      $sRes = new Sell();
-      if(empty($response)){
-        $sRes->textReport = "response is empty";
-      } else {
-        // $response_dump = var_dump($response);
-        // $res_type = gettype($response);
-        $sRes->textReport = "response: $response";
-      }
-      $sRes->save();
+      // $s5 = new Sell();
+      // $s5->textReport = "posle response = provider->verifyIPN(post)";
+      // $s5->save();
+      //
+      // $sRes = new Sell();
+      // if(empty($response)){
+      //   $sRes->textReport = "response is empty";
+      // } else {
+      //   // $response_dump = var_dump($response);
+      //   // $res_type = gettype($response);
+      //   $sRes->textReport = "response: $response";
+      // }
+      // $sRes->save();
 
       $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
       curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -118,14 +118,19 @@ class SellsController extends Controller
       if ($response == 'VERIFIED') {
           // Your code goes here ...
 
-
           $s = new Sell();
-          $s->textReport = "vo VERIFIED";
+          $s->coupon = $post['coupon'];
+          $request_string = (string)$request;
+          $s->textReport = "request_string: " . $request_string;
           $s->save();
 
-          $s = new Sell();
-          $s->textReport = $report;
-          $s->save();
+          // $s = new Sell();
+          // $s->textReport = "vo VERIFIED";
+          // $s->save();
+          //
+          // $s = new Sell();
+          // $s->textReport = $report;
+          // $s->save();
           // error_log("payment verified and inserted to db");
           // Log::info("payment verified and inserted to db");
       }
