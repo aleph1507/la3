@@ -109,7 +109,7 @@ class SellsController extends Controller
       if ( !($res = curl_exec($ch)) ) {
         // error_log("Got " . curl_error($ch) . " when processing IPN data");
         curl_close($ch);
-        // exit;
+        exit;
       }
 
       // error_log("payment before verified and inserted to db");
