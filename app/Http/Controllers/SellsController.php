@@ -45,11 +45,20 @@ class SellsController extends Controller
       // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
       $provider = new ExpressCheckout;
 
+      $s1 = new Sell();
+      $s1->textReport = "posle provider = new ExpressCheckout";
+      $s1->save();
       $request->merge(['cmd' => '_notify-validate']);
+      $s2 = new Sell();
+      $s2->textReport = "posle request->merge(['cmd' => '_notify-validate'])";
+      $s2->save();
       $post = $request->all();
+      $s3 = new Sell();
+      $s3->textReport = "posle post = request->all()";
+      $s3->save();
 
       $s = new Sell();
-      $s->textReport = $post;
+      $s->textReport = "post : " . $post;
       $s->save();
 
       $response = (string) $provider->verifyIPN($post);
