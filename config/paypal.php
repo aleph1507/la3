@@ -10,8 +10,8 @@ return [
         'username'    => env('PAYPAL_SANDBOX_API_USERNAME', ''),
         'password'    => env('PAYPAL_SANDBOX_API_PASSWORD', ''),
         'secret'      => env('PAYPAL_SANDBOX_API_SECRET', ''),
-        'certificate' => env('PAYPAL_SANDBOX_API_CERTIFICATE', ''),
-        'app_id'      => 'APP-80W284485P519543T', // Used for testing Adaptive Payments API in sandbox mode
+        //'certificate' => env('PAYPAL_SANDBOX_API_CERTIFICATE', ''),
+        'app_id'      => 'AfDcAYhpBTmJOwkS4ktZBzSLH2Fv5pvTj9RPGQamuHFbEVhEEsHVuyRpAplcGT2ShkyBAPO3bFrk3Gyi', // Used for testing Adaptive Payments API in sandbox mode
     ],
     'live' => [
         'username'    => env('PAYPAL_LIVE_API_USERNAME', ''),
