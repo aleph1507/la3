@@ -106,11 +106,7 @@ class SellsController extends Controller
       curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 
-      if ( !($response = curl_exec($ch)) ) {
-        // error_log("Got " . curl_error($ch) . " when processing IPN data");
-        curl_close($ch);
-        exit;
-      }
+
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
@@ -137,6 +133,12 @@ class SellsController extends Controller
           // $s->save();
           // error_log("payment verified and inserted to db");
           // Log::info("payment verified and inserted to db");
+      }
+
+      if ( !($response = curl_exec($ch)) ) {
+        // error_log("Got " . curl_error($ch) . " when processing IPN data");
+        curl_close($ch);
+        exit;
       }
 
     }
