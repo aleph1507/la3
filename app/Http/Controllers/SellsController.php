@@ -58,8 +58,9 @@ class SellsController extends Controller
         $sReq->textReport = "request is empty";
       } else {
         // $request_dump = var_dump($request);
-        $req_type = gettype($request);
-        $sReq->textReport = "request_type: $req_type";
+        $request_string = (string)$request;
+        // $req_type = gettype($request);
+        $sReq->textReport = "request_string: $request_string";
       }
       $sReq->save();
 
@@ -72,8 +73,9 @@ class SellsController extends Controller
         $sPost->textReport = "post is empty";
       } else {
         // $post_dump = var_dump($post);
-        $post_type = gettype($post);
-        $sPost->textReport = "gettype(post): $post_type";
+        // $post_type = gettype($post);
+        $post_string = implode(' ,  ', $post);
+        $sPost->textReport = "post_string: $post_string";
       }
       $sPost->save();
 
@@ -88,8 +90,8 @@ class SellsController extends Controller
         $sRes->textReport = "response is empty";
       } else {
         // $response_dump = var_dump($response);
-        $res_type = gettype($response);
-        $sRes->textReport = "response_type: $res_type";
+        // $res_type = gettype($response);
+        $sRes->textReport = "response: $response";
       }
       $sRes->save();
 
@@ -98,6 +100,10 @@ class SellsController extends Controller
 
       if ($response == 'VERIFIED') {
           // Your code goes here ...
+          $s = new Sell();
+          $s->textReport = "vo VERIFIED";
+          $s->save();
+
           $s = new Sell();
           $s->textReport = $report;
           $s->save();
