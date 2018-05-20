@@ -37,7 +37,10 @@ class SellsController extends Controller
     public function paypalIpn(Request $request)
     {
 
-      error_log("in paypalIpn()");
+      $s0 = new Sell();
+      $s0->textReport = "vo paypalIPN()";
+      $s0->save();
+      // error_log("in paypalIpn()");
       // Log::info("in paypalIpn");
       // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
       $provider = new ExpressCheckout;
@@ -45,10 +48,14 @@ class SellsController extends Controller
       $request->merge(['cmd' => '_notify-validate']);
       $post = $request->all();
 
+      $s = new Sell();
+      $s->textReport = $post;
+      $s->save();
+
       $response = (string) $provider->verifyIPN($post);
 
 
-      error_log("payment before verified and inserted to db");
+      // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
 
       if ($response == 'VERIFIED') {
@@ -56,7 +63,7 @@ class SellsController extends Controller
           $s = new Sell();
           $s->textReport = $report;
           $s->save();
-          error_log("payment verified and inserted to db");
+          // error_log("payment verified and inserted to db");
           // Log::info("payment verified and inserted to db");
       }
     }
