@@ -86,15 +86,7 @@ class SellsController extends Controller
       $s5->textReport = "posle response = provider->verifyIPN(post)";
       $s5->save();
 
-      $sRes = new Sell();
-      if(empty($response)){
-        $sRes->textReport = "response is empty";
-      } else {
-        // $response_dump = var_dump($response);
-        // $res_type = gettype($response);
-        $sRes->textReport = "response: $response";
-      }
-      $sRes->save();
+
 
       $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
       curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -111,6 +103,16 @@ class SellsController extends Controller
         curl_close($ch);
         exit;
       }
+
+      $sRes = new Sell();
+      if(empty($response)){
+        $sRes->textReport = "response is empty";
+      } else {
+        // $response_dump = var_dump($response);
+        // $res_type = gettype($response);
+        $sRes->textReport = "response: $response";
+      }
+      $sRes->save();
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
