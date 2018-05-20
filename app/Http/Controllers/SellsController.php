@@ -51,8 +51,8 @@ class SellsController extends Controller
       }
     }
 
-    public function paypalIpn()
-    {
+    // public function paypalIpn()
+    // {
 
       // $provider = new ExpressCheckout;      // To use express checkout.
 
@@ -81,7 +81,7 @@ class SellsController extends Controller
         // } else {
         //     Log::info("Some thing went wrong in the payment !");
         // }
-    }
+    // }
 
     /**
      * Show the form for creating a new resource.
