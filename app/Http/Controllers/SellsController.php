@@ -123,8 +123,8 @@ class SellsController extends Controller
           $s->save();
 
           $s = new Sell();
-          $s->coupon = $post['coupon'];
-          $request_string = (string)$request;
+          $s->coupon = $this->post['coupon'];
+          $request_string = (string)$this->request;
           $s->textReport = "request_string: " . $request_string;
           $s->save();
 
