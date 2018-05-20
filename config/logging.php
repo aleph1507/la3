@@ -37,20 +37,20 @@ return [
 
         'single' => [
             'driver' => 'errorlog',
-            'path' => storage_path('logs/laravel.log'),
+            // 'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
             'driver' => 'errorlog',
-            'path' => storage_path('logs/laravel.log'),
+            // 'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 7,
         ],
 
         'slack' => [
             'driver' => 'errorlog',
-            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            // 'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => 'critical',
