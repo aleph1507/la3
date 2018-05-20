@@ -44,6 +44,10 @@ class SellsController extends Controller
 
       if ($response === 'VERIFIED') {
           // Your code goes here ...
+          $s = new Sell();
+          $s->textReport = $report;
+          $s->save();
+          Log::info("payment verified and inserted to db");
       }
     }
 
