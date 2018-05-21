@@ -101,6 +101,9 @@ class SellsController extends Controller
       $s->textReport = "posle CURLOPT_POSTFIELDS, request";
       $s->save();
       curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+      $s = new Sell();
+      $s->textReport = "posle CURLOPT_SSLVERSION, 6";
+      $s->save();
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
       // This is often required if the server is missing a global cert bundle, or is using an outdated one.
