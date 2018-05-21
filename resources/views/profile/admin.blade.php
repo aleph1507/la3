@@ -14,7 +14,7 @@
             You are a member since: {{ $user->created_at }}
           </p>
           <p>
-            Your Coupon Code is: {{ $couponcode }}
+            Your Coupon Code is: {{ $user->coupon }}
           </p>
           <p>
             Total number of sales: {{$sells_total}}
