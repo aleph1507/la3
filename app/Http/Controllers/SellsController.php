@@ -40,6 +40,9 @@ class SellsController extends Controller
 
     public function paypalIpn(Request $request)
     {
+      $s = new Sell();
+      $s->textReport = "vo paypalIPN()";
+      $s->save();
       $ipn = new PaypalIPN();
       $ipn->useSandbox();
       $verified = $ipn->verifyIPN();
