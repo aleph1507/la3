@@ -49,9 +49,9 @@ class SellsController extends Controller
       $s1 = new Sell();
       $s1->textReport = "posle provider = new ExpressCheckout";
       $s1->save();
-      // $request->merge(['cmd' => '_notify-validate']);
+      $notify_request = $request->merge(['cmd' => '_notify-validate']);
 
-      $notify_request = ['cmd' => '_notify-validate'] + $request->all();
+      // $notify_request = ['cmd' => '_notify-validate'] + $request->all();
       $s = new Sell();
       $s->textReport = "notify_request: " . (string)$notify_request;
       $s->save();
