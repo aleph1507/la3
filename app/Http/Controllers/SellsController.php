@@ -110,12 +110,18 @@ class SellsController extends Controller
           $errno = curl_errno($ch);
           $errstr = curl_error($ch);
           curl_close($ch);
-          throw new Exception("cURL error: [$errno] $errstr");
+          // throw new Exception("cURL error: [$errno] $errstr");
+          $s = new Sell();
+          $s->textReport = "!(res) curl error: $errno - $errstr";
+          $s->save();
       }
       $info = curl_getinfo($ch);
       $http_code = $info['http_code'];
       if ($http_code != 200) {
-          throw new Exception("PayPal responded with http code $http_code");
+          // throw new Exception("PayPal responded with http code $http_code");
+          $s = new Sell();
+          $s->textReport = "!(http_code) paypal responded with http_code : $http_code";
+          $s->save();
       }
       curl_close($ch);
 
