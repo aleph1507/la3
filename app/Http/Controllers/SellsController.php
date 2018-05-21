@@ -99,6 +99,10 @@ class SellsController extends Controller
       // if ($this->use_local_certs) {
       //     curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . "/cert/cacert.pem");
       // }
+      $s = new Sell();
+      $s->textReport = "pred CURLOPT_FORBID_REUSE, 1";
+      $s->save();
+
       curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -106,15 +110,15 @@ class SellsController extends Controller
           'Connection: Close',
       ));
 
-      $s = new Sell();
-      $s->textReport = "pred curn_exec ch: $ch";
-      $s->save();
+      // $s = new Sell();
+      // $s->textReport = "pred curn_exec ch: $ch";
+      // $s->save();
 
       $res = curl_exec($ch);
 
-      $s = new Sell();
-      $s->textReport = "posle curl_exec res: $res";
-      $s->save();
+      // $s = new Sell();
+      // $s->textReport = "posle curl_exec res: $res";
+      // $s->save();
 
       if ( ! ($res)) {
           $errno = curl_errno($ch);
