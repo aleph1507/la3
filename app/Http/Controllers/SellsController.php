@@ -60,6 +60,8 @@ class SellsController extends Controller
 
       $this->logToSell("pred verified request: " . (string)$request);
 
+      $this->logToSell("pred verified response: " . $response);
+
       if ($response === 'VERIFIED') {
           // Your code goes here ...
 
