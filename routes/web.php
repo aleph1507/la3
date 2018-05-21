@@ -45,3 +45,5 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/paypalipn', 'SellsController@paypalIpn')->name('paypalIPN');
+
+Route::get('/admin', 'ProfileController@admin')->name('admin');

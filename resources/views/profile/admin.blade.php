@@ -17,10 +17,31 @@
             Your Coupon Code is: {{ $couponcode }}
           </p>
           <p>
-            Your sell count thus far is: {{$sell_count}}
+            Total number of sales: {{$sells_total}}
           </p>
         </div>
       </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Coupon</th>
+            <th>Sell Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($users as $u)
+            <tr>
+              <td>{{$u->name}}</td>
+              <td>{{$us->email}}</td>
+              <td>{{$u->coupon}}</td>
+              <td>{{App\Sell::where('coupon','=',$u->coupon)->count()}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
      </div>
   </div>
 </div>

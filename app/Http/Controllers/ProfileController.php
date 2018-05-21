@@ -31,6 +31,9 @@ class ProfileController extends Controller
     public function admin() {
       $user = Auth::user();
       $users = User::all();
+      $sells = Sell::all();
+      $sells_total = Sell::count();
+      return view('profile.admin')->with(compact('user', 'users', 'sells', 'sells_total'));
     }
 
     /**
