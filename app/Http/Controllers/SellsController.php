@@ -105,7 +105,17 @@ class SellsController extends Controller
           'User-Agent: PHP-IPN-Verification-Script',
           'Connection: Close',
       ));
+
+      $s = new Sell();
+      $s->textReport = "pred curn_exec ch: $ch";
+      $s->save();
+
       $res = curl_exec($ch);
+
+      $s = new Sell();
+      $s->textReport = "posle curl_exec res: $res";
+      $s->save();
+
       if ( ! ($res)) {
           $errno = curl_errno($ch);
           $errstr = curl_error($ch);
