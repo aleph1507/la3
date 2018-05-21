@@ -88,86 +88,23 @@ class SellsController extends Controller
 
 
       $ch = curl_init('https://ipnpb.sandbox.paypal.com/cgi-bin/webscr');
-      $s = new Sell();
-      $s->textReport = "posle curl_init";
-      $s->save();
       curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
       curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-      $s = new Sell();
-      $s->textReport = "posle CURLOPT_POSTFIELDS, request";
-      $s->save();
-      curl_setopt($ch, CURLOPT_SSLVERSION, 6);
-      $s = new Sell();
-      $s->textReport = "posle CURLOPT_SSLVERSION, 6";
-      $s->save();
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-      // This is often required if the server is missing a global cert bundle, or is using an outdated one.
-      // if ($this->use_local_certs) {
-      //     curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . "/cert/cacert.pem");
-      // }
-      $s = new Sell();
-      $s->textReport = "pred CURLOPT_FORBID_REUSE, 1";
-      $s->save();
-
       curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'User-Agent: PHP-IPN-Verification-Script',
-          'Connection: Close',
-      ));
-
-      // $s = new Sell();
-      // $s->textReport = "pred curn_exec ch: $ch";
-      // $s->save();
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('User-Agent: PHP-IPN-Verification-Script, Connection: Close'));
 
       $res = curl_exec($ch);
-
-      // $s = new Sell();
-      // $s->textReport = "posle curl_exec res: $res";
-      // $s->save();
-
-      if ( ! ($res)) {
-          $errno = curl_errno($ch);
-          $errstr = curl_error($ch);
-          curl_close($ch);
-          // throw new Exception("cURL error: [$errno] $errstr");
-          $s = new Sell();
-          $s->textReport = "!(res) curl error: $errno - $errstr";
-          $s->save();
-      }
-      $info = curl_getinfo($ch);
-      $http_code = $info['http_code'];
-      if ($http_code != 200) {
-          // throw new Exception("PayPal responded with http code $http_code");
-          $s = new Sell();
-          $s->textReport = "!(http_code) paypal responded with http_code : $http_code";
-          $s->save();
-      }
       curl_close($ch);
 
-      // $ch = curl_init('https://ipnpb.sandbox.paypal.com/cgi-bin/webscr');
-      // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-      // curl_setopt($ch, CURLOPT_POST, 1);
-      // curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-      // curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-      // curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-      // curl_setopt($ch, CURLOPT_HTTPHEADER, array('User-Agent: PHP-IPN-Verification-Script, Connection: Close'));
-      //
-      // $res = curl_exec($ch);
-      // curl_close($ch);
-
-      // if ( !($res = curl_exec($ch)) ) {
-        // error_log("Got " . curl_error($ch) . " when processing IPN data");
-      //   curl_close($ch);
-      //   exit;
-      // }
+      if ( !($res = curl_exec($ch)) ) {
+        error_log("Got " . curl_error($ch) . " when processing IPN data");
+        curl_close($ch);
+        exit;
+      }
 
       $sRes = new Sell();
       if(empty($res)){
