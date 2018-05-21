@@ -88,18 +88,18 @@ class SellsController extends Controller
 
 
 
-      $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
-      curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-      curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
-
-      $res = curl_exec($ch);
-      curl_close($ch);
+      // $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
+      // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      // curl_setopt($ch, CURLOPT_POST, 1);
+      // curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+      // curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
+      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+      // curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+      // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
+      //
+      // $res = curl_exec($ch);
+      // curl_close($ch);
 
       // if ( !($res = curl_exec($ch)) ) {
         // error_log("Got " . curl_error($ch) . " when processing IPN data");
