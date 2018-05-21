@@ -35,7 +35,7 @@
           @foreach($users as $u)
             <tr>
               <td>{{$u->name}}</td>
-              <td>{{$us->email}}</td>
+              <td>{{$u->email}}</td>
               <td>{{$u->coupon}}</td>
               <td>{{App\Sell::where('coupon','=',$u->coupon)->count()}}</td>
             </tr>
