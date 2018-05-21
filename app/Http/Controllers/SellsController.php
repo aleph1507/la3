@@ -41,28 +41,8 @@ class SellsController extends Controller
     public function paypalIpn(Request $request)
     {
       $s = new Sell();
-      $s->textReport = "vo paypalIPN()";
+      $s->textReport = "request: " . (string)$request;
       $s->save();
-      $ipn = new PaypalIPN();
-      $ipn->useSandbox();
-      $verified = $ipn->verifyIPN();
-      $s = new Sell();
-      $s->textReport = "Pred if(verified), verified: " . $verified;
-      $s->save();
-      if ($verified) {
-          /*
-           * Process IPN
-           * A list of variables is available here:
-           * https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNandPDTVariables/
-           */
-
-           $s = new Sell();
-           $s->textReport = "vo if " . $verified;
-           $s->save();
-      }
-
-      // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
-      header("HTTP/1.1 200 OK");
 
       // $s0 = new Sell();
       // $s0->textReport = "vo paypalIPN()";
