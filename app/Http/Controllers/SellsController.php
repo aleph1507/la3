@@ -40,22 +40,20 @@ class SellsController extends Controller
 
     public function paypalIpn(Request $request)
     {
-      $s = new Sell();
-      $s->textReport = "request: " . (string)$request;
-      $s->save();
-
       // $s0 = new Sell();
       // $s0->textReport = "vo paypalIPN()";
       // $s0->save();
-      // // error_log("in paypalIpn()");
-      // // Log::info("in paypalIpn");
       // // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
-      // $provider = new ExpressCheckout;
-      //
-      // $s1 = new Sell();
-      // $s1->textReport = "posle provider = new ExpressCheckout";
-      // $s1->save();
-      // // $request->merge(['cmd' => '_notify-validate']);
+      $provider = new ExpressCheckout;
+
+      $s1 = new Sell();
+      $s1->textReport = "posle provider = new ExpressCheckout";
+      $s1->save();
+      // $request->merge(['cmd' => '_notify-validate']);
+      $notify_request = array_merge(['cmd' => '_notify-validate'], $request->all());
+      $s = new Sell();
+      $s->textReport = "notify_request: " . (string)$notify_request;
+      $s->save();
       // $request->attributes->add([
       //     "cmd" => '_notify-validate',
       // ]);
