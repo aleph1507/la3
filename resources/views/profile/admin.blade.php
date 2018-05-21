@@ -14,7 +14,7 @@
             You are a member since: {{ $user->created_at }}
           </p>
           <p>
-            Your Coupon Code is: {{ $user->coupon }}
+            Your Coupon Code is: {{ $user->coupon() }}
           </p>
           <p>
             Total number of sales: {{$sells_total}}
@@ -36,7 +36,7 @@
             <tr>
               <td>{{$u->name}}</td>
               <td>{{$u->email}}</td>
-              <td>{{$u->coupon}}</td>
+              <td>{{$u->coupon()}}</td>
               <td>{{App\Sell::where('coupon','=',$u->coupon)->count()}}</td>
             </tr>
           @endforeach
