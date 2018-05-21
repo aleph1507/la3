@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Coupon;
 use App\Sell;
+use App\User;
 
 class ProfileController extends Controller
 {
