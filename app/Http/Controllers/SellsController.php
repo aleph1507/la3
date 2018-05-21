@@ -91,7 +91,13 @@ class SellsController extends Controller
       curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+      $s = new Sell();
+      $s->textReport = "pred CURLOPT_POSTFIELDS, request: " . (string)$request;
+      $s->save();
       curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+      $s = new Sell();
+      $s->textReport = "posle CURLOPT_POSTFIELDS, request";
+      $s->save();
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
       curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
