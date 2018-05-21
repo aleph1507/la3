@@ -59,10 +59,6 @@ class SellsController extends Controller
 
       $response = (string) $provider->verifyIPN($post);
 
-      $this->logToSell("pred verified request: " . (string)$request);
-
-      $this->logToSell("pred verified response: " . $response);
-
       if ($response === 'VERIFIED') {
           // Your code goes here ...
 
