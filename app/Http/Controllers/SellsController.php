@@ -80,13 +80,44 @@ class SellsController extends Controller
       }
       $sPost->save();
 
-      $response = (string) $provider->verifyIPN($post);
+      // $response = (string) $provider->verifyIPN($post);
 
       $s5 = new Sell();
       $s5->textReport = "posle response = provider->verifyIPN(post)";
       $s5->save();
 
 
+      $ch = curl_init($this->getPaypalUri());
+      curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+      curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+      // This is often required if the server is missing a global cert bundle, or is using an outdated one.
+      if ($this->use_local_certs) {
+          curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . "/cert/cacert.pem");
+      }
+      curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+          'User-Agent: PHP-IPN-Verification-Script',
+          'Connection: Close',
+      ));
+      $res = curl_exec($ch);
+      if ( ! ($res)) {
+          $errno = curl_errno($ch);
+          $errstr = curl_error($ch);
+          curl_close($ch);
+          throw new Exception("cURL error: [$errno] $errstr");
+      }
+      $info = curl_getinfo($ch);
+      $http_code = $info['http_code'];
+      if ($http_code != 200) {
+          throw new Exception("PayPal responded with http code $http_code");
+      }
+      curl_close($ch);
 
       // $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
       // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -108,19 +139,19 @@ class SellsController extends Controller
       // }
 
       $sRes = new Sell();
-      if(empty($response)){
-        $sRes->textReport = "response is empty";
+      if(empty($res)){
+        $sRes->textReport = "res is empty";
       } else {
         // $response_dump = var_dump($response);
         // $res_type = gettype($response);
-        $sRes->textReport = "response: $response";
+        $sRes->textReport = "res: $res";
       }
       $sRes->save();
 
       // error_log("payment before verified and inserted to db");
       // Log::info("payment before verified and inserted to db");
 
-      if ($response == 'VERIFIED') {
+      if ($res == 'VERIFIED') {
           // Your code goes here ...
 
           $s = new Sell();
