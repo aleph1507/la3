@@ -65,6 +65,8 @@ class SellsController extends Controller
       if ($response === 'VERIFIED') {
           // Your code goes here ...
 
+          $this->logToSell("vo if verified, post[custom]: " . $post['custom']);
+
       }
 
       // $post = $request->all();
