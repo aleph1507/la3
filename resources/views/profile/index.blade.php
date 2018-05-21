@@ -16,6 +16,9 @@
           <p>
             Your Coupon Code is: {{ $couponcode }}
           </p>
+          <p>
+            Your sell count thus far is: {{$sell_count}}
+          </p>
         </div>
       </div>
      </div>

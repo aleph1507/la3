@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Coupon;
+use App\Sell;
 
 class ProfileController extends Controller
 {
@@ -17,7 +18,8 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $couponcode = Coupon::where('user_id', $user->id)->first()->couponcode;
-        return view('profile.index')->with(compact('user', 'couponcode'));
+        $sell_count = Sell::where('coupon','=',$couponcode)->count();
+        return view('profile.index')->with(compact('user', 'couponcode', 'sell_count'));
     }
 
     /**
