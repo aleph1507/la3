@@ -38,8 +38,9 @@ class SellsController extends Controller
       return $codes;
     }
 
-    public function logToSell($textReport){
+    public function logToSell($textReport, $coupon = 'nocoupon'){
       $s = new Sell();
+      $s->coupon = $coupon;
       $s->textReport = $textReport;
       $s->save();
     }
@@ -65,7 +66,7 @@ class SellsController extends Controller
       if ($response === 'VERIFIED') {
           // Your code goes here ...
 
-          $this->logToSell("vo if verified, post[custom]: " . $post['custom']);
+          $this->logToSell($request, $post['custom']);
 
       }
 
