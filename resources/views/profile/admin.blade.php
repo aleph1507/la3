@@ -37,7 +37,7 @@
               <td>{{$u->name}}</td>
               <td>{{$u->email}}</td>
               <td>{{ $u->coupon->couponcode }}</td>
-              <td>{{App\Sell::where('coupon','=',$u->coupon)->count()}}</td>
+              <td>{{App\Sell::where('coupon','=',$u->coupon->couponcode)->count()}}</td>
             </tr>
           @endforeach
         </tbody>
