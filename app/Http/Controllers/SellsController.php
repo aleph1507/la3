@@ -99,6 +99,7 @@ class SellsController extends Controller
       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 
       $res = curl_exec($ch);
+      curl_close($ch);
 
       // if ( !($res = curl_exec($ch)) ) {
         // error_log("Got " . curl_error($ch) . " when processing IPN data");
