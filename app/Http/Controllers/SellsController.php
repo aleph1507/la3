@@ -173,7 +173,7 @@ class SellsController extends Controller
           // $s->save();
           // error_log("payment verified and inserted to db");
           // Log::info("payment verified and inserted to db");
-      }
+      // }
 
     }
 
