@@ -9,6 +9,12 @@ use App\Sell;
 
 class ProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +26,11 @@ class ProfileController extends Controller
         $couponcode = Coupon::where('user_id', $user->id)->first()->couponcode;
         $sell_count = Sell::where('coupon','=',$couponcode)->count();
         return view('profile.index')->with(compact('user', 'couponcode', 'sell_count'));
+    }
+
+    public function admin() {
+      $user = Auth::user();
+      $users = User::all();
     }
 
     /**

@@ -9,6 +9,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function coupon() {
+      return $this->hasOne('App\Coupon');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
