@@ -39,6 +39,10 @@ class SellsController extends Controller
     }
 
     public function logToSell($textReport, $coupon = 'nocoupon'){
+      // $s0 = new Sell();
+      // $s0->textReport = "vo logToSell";
+      // $s0->save();
+
       $s = new Sell();
       $s->coupon = $coupon;
       $s->textReport = $textReport;
@@ -47,7 +51,7 @@ class SellsController extends Controller
 
     public function paypalIpn(Request $request)
     {
-      // $s0 = new Sell();
+      $s0 = new Sell();
       // $s0->textReport = "vo paypalIPN()";
       // $s0->save();
       // // Import the namespace Srmklive\PayPal\Services\ExpressCheckout first in your controller.
@@ -59,8 +63,15 @@ class SellsController extends Controller
 
       $response = (string) $provider->verifyIPN($post);
 
+      // $s0 = new Sell();
+      // $s0->textReport = "vo paypalIPN() response: " . $response;
+      // $s0->save();
+
       if ($response === 'VERIFIED') {
           // Your code goes here ...
+          // $s0 = new Sell();
+          // $s0->textReport = "vo paypalIPN() VERIFIED";
+          // $s0->save();
 
           $this->logToSell($request, $post['custom']);
 
