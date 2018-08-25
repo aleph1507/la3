@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<!--  pass: adminabloom-->
 @section('content')
 @if(Auth::user()->email == 'loveabloominthe@gmail.com')
 <div class="container">
